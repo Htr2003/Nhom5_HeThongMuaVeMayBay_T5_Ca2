@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DoAnCNPMNC.Models.ChuyenBay>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link href="~/Content/bootstrap.min.css" />
+}
+
+<div style="padding: 0 300px 0 300px">
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Giờ khởi hành
+                    </th>
+                    <th>
+                        Ngày khởi hành
+                    </th>
+                    <th>
+                        Số ghế
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ChuyenBayID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GioKhoiHanh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalGheTrongAndVip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrangThai)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ChuyenBayID }, new { @class = "btn btn-info" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ChuyenBayID }, new { @class = "btn btn-success" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ChuyenBayID }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+

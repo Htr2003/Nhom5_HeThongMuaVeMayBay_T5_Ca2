@@ -1,0 +1,71 @@
+﻿@model DoAnCNPMNC.Models.KhachHang
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+}
+
+<head>
+    <style>
+        #titleRegister {
+            margin-left: 35%;
+            font-size:18px;
+        }
+
+        #inputRegister {
+            width: 30%;
+            margin-left: 35%;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<div style="margin: 10px auto;width:70%;">
+    <h2 style="text-align: center; padding-top: 30px; font-size: 30px;">ĐĂNG KÍ</h2>
+    @using (Html.BeginForm("Register", "TrangChu"))
+    {
+        @Html.ValidationSummary(true)
+        <div class="mb-3 mt-3">
+            <label id="titleRegister" for="name" class="form-label">Họ và tên:</label>
+            <input type="text" class="form-control" id="inputRegister" name="HoTen" required>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label id="titleRegister" for="gender" class="form-label">giới tính:</label>
+            <input type="text" class="form-control" id="inputRegister" name="GioiTinh" required>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label id="titleRegister" for="gender" class="form-label">email:</label>
+            <input type="email" class="form-control" id="inputRegister" name="Email" required>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label id="titleRegister" for="gender" class="form-label">Sdt:</label>
+            <input type="tel" class="form-control" id="inputRegister" name="Sdt" required>
+            @Html.ValidationMessageFor(model => model.Sdt)
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label id="titleRegister" for="ngaysinh" class="form-label">Ngày sinh:</label>
+            <input type="datetime-local" class="form-control" id="inputRegister" name="NgaySinh" required>
+            @if (!string.IsNullOrEmpty(ViewBag.DateOfBirthError))
+            {
+                <div class="text-danger">
+                    @ViewBag.LoiNgaySinh
+                </div>
+            }
+        </div>
+        <div class="mb-3">
+            <label id="titleRegister" for="act" class="form-label">Tên đăng nhập:</label>
+            <input type="text" class="form-control" id="inputRegister" name="TenDangNhap" required>
+        </div>
+        <div class="mb-3">
+            <label id="titleRegister" for="pwd" class="form-label">Mật khẩu:</label>
+            <input type="password" class="form-control" id="inputRegister" name="MatKhau" required>
+        </div>
+
+        <button style=" margin-left: 47% ; border-radius:20px" type="submit" background-color="#C7626F" class="btn btn-primary">XÁC NHẬN</button>
+    }
+
+</div>

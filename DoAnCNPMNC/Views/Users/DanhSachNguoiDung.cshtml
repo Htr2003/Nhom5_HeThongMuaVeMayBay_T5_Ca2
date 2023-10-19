@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DoAnCNPMNC.Models.KhachHang>
+
+@{
+    ViewBag.Title = "DanhSachNguoiDung";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <h2 class="text-center mt-4 mb-4">Danh sách khách hàng</h2>
+
+    <div class="text-right mb-2">
+        @Html.ActionLink("Sort by Name", "DanhSachNguoiDung", new { sortOrder = "HoTen" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Sort by Birthday", "DanhSachNguoiDung", new { sortOrder = "NgaySinh" }, new { @class = "btn btn-primary" })
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ Tên</th>
+                <th>Ngày Sinh</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Sdt)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBRedNitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="20" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ChuyenBay">
+          <Key>
+            <PropertyRef Name="ChuyenBayID" />
+          </Key>
+          <Property Name="ChuyenBayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SanKhoiHanhID" Type="char" MaxLength="10" />
+          <Property Name="SanDenID" Type="char" MaxLength="10" />
+          <Property Name="GioKhoiHanh" Type="time" Precision="7" />
+          <Property Name="GioKetThuc" Type="time" Precision="7" />
+          <Property Name="NgayKhoiHanh" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="SoGheTrong" Type="int" />
+          <Property Name="SoGheVipTrong" Type="int" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="KhID" />
+          </Key>
+          <Property Name="KhID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Sdt" Type="varchar" MaxLength="11" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="TenDangNhap" Type="nvarchar" MaxLength="20" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SanBay">
+          <Key>
+            <PropertyRef Name="SanBayID" />
+          </Key>
+          <Property Name="SanBayID" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TenSanBay" Type="nvarchar" MaxLength="100" />
+          <Property Name="ThanhPho" Type="nvarchar" MaxLength="50" />
+          <Property Name="DatNuoc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ve">
+          <Key>
+            <PropertyRef Name="VeID" />
+          </Key>
+          <Property Name="VeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChuyenBayID" Type="int" />
+          <Property Name="KhID" Type="int" />
+          <Property Name="NgayDatVe" Type="datetime" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="LoaiVe" Type="nvarchar" MaxLength="20" />
+          <Property Name="HangGhe" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="fk_chuyenbay_sanbay">
+          <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanBay">
+              <PropertyRef Name="SanBayID" />
+            </Principal>
+            <Dependent Role="ChuyenBay">
+              <PropertyRef Name="SanKhoiHanhID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_chuyenbay_sanbay2">
+          <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanBay">
+              <PropertyRef Name="SanBayID" />
+            </Principal>
+            <Dependent Role="ChuyenBay">
+              <PropertyRef Name="SanDenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ve_chuyenbay">
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="0..1" />
+          <End Role="Ve" Type="Self.Ve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChuyenBay">
+              <PropertyRef Name="ChuyenBayID" />
+            </Principal>
+            <Dependent Role="Ve">
+              <PropertyRef Name="ChuyenBayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ve_khach">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="Ve" Type="Self.Ve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="KhID" />
+            </Principal>
+            <Dependent Role="Ve">
+              <PropertyRef Name="KhID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBRedNitModelStoreContainer">
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChuyenBay" EntityType="Self.ChuyenBay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanBay" EntityType="Self.SanBay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ve" EntityType="Self.Ve" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_chuyenbay_sanbay" Association="Self.fk_chuyenbay_sanbay">
+            <End Role="SanBay" EntitySet="SanBay" />
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="fk_chuyenbay_sanbay2" Association="Self.fk_chuyenbay_sanbay2">
+            <End Role="SanBay" EntitySet="SanBay" />
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ve_chuyenbay" Association="Self.fk_ve_chuyenbay">
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+            <End Role="Ve" EntitySet="Ve" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ve_khach" Association="Self.fk_ve_khach">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="Ve" EntitySet="Ve" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBRedNitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChuyenBay">
+          <Key>
+            <PropertyRef Name="ChuyenBayID" />
+          </Key>
+          <Property Name="ChuyenBayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SanKhoiHanhID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="SanDenID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="GioKhoiHanh" Type="Time" Precision="7" />
+          <Property Name="GioKetThuc" Type="Time" Precision="7" />
+          <Property Name="NgayKhoiHanh" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="SoGheTrong" Type="Int32" />
+          <Property Name="SoGheVipTrong" Type="Int32" />
+          <Property Name="TrangThai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SanBay" Relationship="Self.fk_chuyenbay_sanbay" FromRole="ChuyenBay" ToRole="SanBay" />
+          <NavigationProperty Name="SanBay1" Relationship="Self.fk_chuyenbay_sanbay2" FromRole="ChuyenBay" ToRole="SanBay" />
+          <NavigationProperty Name="Ve" Relationship="Self.fk_ve_chuyenbay" FromRole="ChuyenBay" ToRole="Ve" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="KhID" />
+          </Key>
+          <Property Name="KhID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Sdt" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ve" Relationship="Self.fk_ve_khach" FromRole="KhachHang" ToRole="Ve" />
+        </EntityType>
+        <EntityType Name="SanBay">
+          <Key>
+            <PropertyRef Name="SanBayID" />
+          </Key>
+          <Property Name="SanBayID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenSanBay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ThanhPho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DatNuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChuyenBay" Relationship="Self.fk_chuyenbay_sanbay" FromRole="SanBay" ToRole="ChuyenBay" />
+          <NavigationProperty Name="ChuyenBay1" Relationship="Self.fk_chuyenbay_sanbay2" FromRole="SanBay" ToRole="ChuyenBay" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ve">
+          <Key>
+            <PropertyRef Name="VeID" />
+          </Key>
+          <Property Name="VeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChuyenBayID" Type="Int32" />
+          <Property Name="KhID" Type="Int32" />
+          <Property Name="NgayDatVe" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="LoaiVe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HangGhe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChuyenBay" Relationship="Self.fk_ve_chuyenbay" FromRole="Ve" ToRole="ChuyenBay" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.fk_ve_khach" FromRole="Ve" ToRole="KhachHang" />
+        </EntityType>
+        <Association Name="fk_chuyenbay_sanbay">
+          <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanBay">
+              <PropertyRef Name="SanBayID" />
+            </Principal>
+            <Dependent Role="ChuyenBay">
+              <PropertyRef Name="SanKhoiHanhID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_chuyenbay_sanbay2">
+          <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanBay">
+              <PropertyRef Name="SanBayID" />
+            </Principal>
+            <Dependent Role="ChuyenBay">
+              <PropertyRef Name="SanDenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ve_chuyenbay">
+          <End Role="ChuyenBay" Type="Self.ChuyenBay" Multiplicity="0..1" />
+          <End Role="Ve" Type="Self.Ve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChuyenBay">
+              <PropertyRef Name="ChuyenBayID" />
+            </Principal>
+            <Dependent Role="Ve">
+              <PropertyRef Name="ChuyenBayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ve_khach">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="Ve" Type="Self.Ve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="KhID" />
+            </Principal>
+            <Dependent Role="Ve">
+              <PropertyRef Name="KhID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBRedNitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" />
+          <EntitySet Name="ChuyenBay" EntityType="Self.ChuyenBay" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" />
+          <EntitySet Name="SanBay" EntityType="Self.SanBay" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Ve" EntityType="Self.Ve" />
+          <AssociationSet Name="fk_chuyenbay_sanbay" Association="Self.fk_chuyenbay_sanbay">
+            <End Role="SanBay" EntitySet="SanBay" />
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="fk_chuyenbay_sanbay2" Association="Self.fk_chuyenbay_sanbay2">
+            <End Role="SanBay" EntitySet="SanBay" />
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ve_chuyenbay" Association="Self.fk_ve_chuyenbay">
+            <End Role="ChuyenBay" EntitySet="ChuyenBay" />
+            <End Role="Ve" EntitySet="Ve" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ve_khach" Association="Self.fk_ve_khach">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="Ve" EntitySet="Ve" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBRedNitModelStoreContainer" CdmEntityContainer="DBRedNitEntities">
+          <EntitySetMapping Name="AdminUser">
+            <EntityTypeMapping TypeName="DBRedNitModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChuyenBay">
+            <EntityTypeMapping TypeName="DBRedNitModel.ChuyenBay">
+              <MappingFragment StoreEntitySet="ChuyenBay">
+                <ScalarProperty Name="ChuyenBayID" ColumnName="ChuyenBayID" />
+                <ScalarProperty Name="SanKhoiHanhID" ColumnName="SanKhoiHanhID" />
+                <ScalarProperty Name="SanDenID" ColumnName="SanDenID" />
+                <ScalarProperty Name="GioKhoiHanh" ColumnName="GioKhoiHanh" />
+                <ScalarProperty Name="GioKetThuc" ColumnName="GioKetThuc" />
+                <ScalarProperty Name="NgayKhoiHanh" ColumnName="NgayKhoiHanh" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="SoGheTrong" ColumnName="SoGheTrong" />
+                <ScalarProperty Name="SoGheVipTrong" ColumnName="SoGheVipTrong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHang">
+            <EntityTypeMapping TypeName="DBRedNitModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="KhID" ColumnName="KhID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SanBay">
+            <EntityTypeMapping TypeName="DBRedNitModel.SanBay">
+              <MappingFragment StoreEntitySet="SanBay">
+                <ScalarProperty Name="SanBayID" ColumnName="SanBayID" />
+                <ScalarProperty Name="TenSanBay" ColumnName="TenSanBay" />
+                <ScalarProperty Name="ThanhPho" ColumnName="ThanhPho" />
+                <ScalarProperty Name="DatNuoc" ColumnName="DatNuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBRedNitModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ve">
+            <EntityTypeMapping TypeName="DBRedNitModel.Ve">
+              <MappingFragment StoreEntitySet="Ve">
+                <ScalarProperty Name="VeID" ColumnName="VeID" />
+                <ScalarProperty Name="ChuyenBayID" ColumnName="ChuyenBayID" />
+                <ScalarProperty Name="KhID" ColumnName="KhID" />
+                <ScalarProperty Name="NgayDatVe" ColumnName="NgayDatVe" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="LoaiVe" ColumnName="LoaiVe" />
+                <ScalarProperty Name="HangGhe" ColumnName="HangGhe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
