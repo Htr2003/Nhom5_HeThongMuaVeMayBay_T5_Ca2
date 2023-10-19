@@ -132,5 +132,12 @@ namespace DoAnCNPMNC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpGet, ActionName("Sort")]
+        public ActionResult Sort()
+        {
+            var sort = db.ChuyenBay.OrderByDescending(x => x.GioKhoiHanh).ToList();
+            return View(sort.ToList());
+        }
     }
 }
