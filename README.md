@@ -1,10 +1,12 @@
 # Quản Lý Đặt Vé Máy Bay
+![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/5717be62-e0c5-4222-a07f-97d563d3aa3d)
 
 **Dự Án Quản Lý Đặt Vé Máy Bay** là một ứng dụng phần mềm được phát triển bởi nhóm chúng tôi: 
-                                  | Tống Nguyễn Hoàng Phúc|
-                                  | Nguyễn Hồ Hữu Trí     |
-                                  | Nguyễn Phước An       |
-                                  | Huỳnh Ngọc Thiên Thư  |
+
+- Tống Nguyễn Hoàng Phúc
+- Nguyễn Hồ Hữu Trí 
+- Nguyễn Phước An 
+- Huỳnh Ngọc Thiên Thư  
 
 Dự án này giúp người dùng dễ dàng tìm kiếm, đặt vé máy bay và quản lý thông tin đặt chỗ của họ.
 
