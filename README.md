@@ -54,7 +54,11 @@ Chúng tôi rất hoan nghênh đóng góp từ cộng đồng. Nếu bạn mu�
 
 ##Công Nghệ Sử Dụng
 
--  Công Nghệ: Node.js, React, MySQL
+-  Công Nghệ: c#, bootstrap, entity framework
+![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/4c30d2c5-6826-4735-8e4f-ffe0a886f6ab)  ![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/a98bf4ec-14e0-4860-93d4-e6221c4d46bf)  ![Uploading image.png…]()
+
+
+
 -  Công Cụ: Visual Studio Code, Git, GitHub
 
 
