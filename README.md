@@ -52,6 +52,21 @@ Chúng tôi rất hoan nghênh đóng góp từ cộng đồng. Nếu bạn mu�
 
 5. Tạo một Yêu cầu Kéo (Pull Request).
 
+##Công Nghệ Sử Dụng
+
+-  Công Nghệ: Node.js, React, MySQL
+-  Công Cụ: Visual Studio Code, Git, GitHub
+
+
+##Hướng Phát Triển:
+
+-  Tối ưu hóa hiệu suất ứng dụng
+-  Thêm tính năng tương tác thêm với người dùng
+-  Hỗ trợ nhiều ngôn ngữ
+-  Phát triển ứng dụng di động
+-  Bảng Phân Công Công Việc
+-  Nếu bạn đã có bảng phân công công việc, bạn có thể thêm nó vào README để thể hiện cách mà các thành viên trong nhóm làm việc:
+
 ## Giấy Phép
 
 Dự án này được phân phối dưới giấy phép MIT. Xem [LICENSE](LICENSE) để biết thêm chi tiết.
