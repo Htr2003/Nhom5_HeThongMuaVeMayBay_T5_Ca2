@@ -1,4 +1,5 @@
-![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/ab103af0-1a50-4906-b9e0-f80a06d2ed16)# Quản Lý Đặt Vé Máy Bay
+![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/5717be62-e0c5-4222-a07f-97d563d3aa3d)
+# Quản Lý Đặt Vé Máy Bay
 
 **Dự Án Quản Lý Đặt Vé Máy Bay** là một ứng dụng phần mềm được phát triển bởi nhóm chúng tôi: 
 
@@ -56,7 +57,7 @@ Chúng tôi rất hoan nghênh đóng góp từ cộng đồng. Nếu bạn mu�
 -  Công Nghệ: c#, bootstrap, entity framework
 ![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/4c30d2c5-6826-4735-8e4f-ffe0a886f6ab)
 ![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/a98bf4ec-14e0-4860-93d4-e6221c4d46bf)
-![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/5717be62-e0c5-4222-a07f-97d563d3aa3d)
+![image](https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2/assets/147679800/ab103af0-1a50-4906-b9e0-f80a06d2ed16)
 
 
 
