@@ -1,1 +1,63 @@
-﻿
+﻿.flight-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-item {
+    border: 2px solid hidden;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+
+.flight-details {
+    margin-top: 10px;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.flight-time {
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.flight-price {
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-size: 18px; /* Kích thước font chữ tăng lên */
+    float: left;
+    width: 30%;
+}
+
+.flight-actions a {
+    margin-top: 25px;
+    margin-right:10px;
+    color: #fff;
+    padding:4px 4px 4px 4px;
+    border-radius: 4px;
+    border-width:5px;
+    background-color: #C7626F;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+    .flight-actions a:hover {
+        color: #fff !important;
+        border: 1px solid #fff;
+    }
+
+

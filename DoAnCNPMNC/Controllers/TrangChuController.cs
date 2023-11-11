@@ -120,5 +120,19 @@ namespace DoAnCNPMNC.Controllers
             var chuyenBay = db.ChuyenBay.Include(c => c.SanBay).Include(c => c.SanBay1);
             return View(chuyenBay.ToList());
         }
+
+        [HttpGet]
+        public ActionResult DatVe()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DatVe(Ve model)
+        {
+
+
+            return View(model);
+        }
     }
 }

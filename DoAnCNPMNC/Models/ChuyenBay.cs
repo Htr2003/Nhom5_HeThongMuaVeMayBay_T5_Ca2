@@ -30,12 +30,13 @@ namespace DoAnCNPMNC.Models
         public Nullable<int> SoGheTrong { get; set; }
         public Nullable<int> SoGheVipTrong { get; set; }
         public string TrangThai { get; set; }
+        public Nullable<int> GiaPhoThong { get; set; }
+        public Nullable<int> GiaThuongGia { get; set; }
     
+        public Nullable<int> TotalGheTrongAndVip { get; set; }
         public virtual SanBay SanBay { get; set; }
         public virtual SanBay SanBay1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ve { get; set; }
-
-        public Nullable<int> TotalGheTrongAndVip { get { return (int)(SoGheTrong + SoGheVipTrong); } }
     }
 }

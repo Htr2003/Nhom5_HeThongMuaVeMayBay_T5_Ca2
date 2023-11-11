@@ -3,78 +3,49 @@
 @{
     ViewBag.Title = "DanhSachChuyenBay";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/listFlight.css" />
 }
 
 <h2 style="text-align: center; padding: 10px 0 20px 0; color: #C7626F; ">Danh Sách Chuyến Bay</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Giờ khởi hành
-        </th>
-        <th>
-            Giờ kết thúc 
-        </th>
-        <th>
-            Ngày khởi hành
-        </th>
-        <th>
-            Ngày kết thúc
-        </th>
-        <th>
-            Số Ghế Trống
-        </th>
-        <th>
-            Số ghế vip trống
-        </th>
-        <th>
-            Sân khởi hành
-        </th>
-        <th>
-            Sân kết thúc
-        </th>
-        <th></th>
-    </tr>
+<div class="flight-list ">
+    @foreach (var item in Model)
+    {
+        <div class="flight-item shadow-lg">
+            <div>
+                <div class="flight-details ">
+                    <strong> Sân khởi hành: </strong>@Html.DisplayFor(modelItem => item.SanBay.TenSanBay)
+                </div>
+                <div class="flight-details ">
+                    <strong> Sân đến: </strong>@Html.DisplayFor(modelItem => item.SanBay1.TenSanBay)
+                </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioKhoiHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioKetThuc)
-        </td>
+                <div class="flight-details">
+                    <strong>Giá phổ thông: </strong> 
+                    @Html.DisplayFor(modelItem => item.GiaPhoThong)
+                </div>
 
-        <td>
-            @if (item.NgayKhoiHanh.HasValue)
-            {
-                @item.NgayKhoiHanh.Value.ToString("dd/MM/yyyy")
-            }
-        </td>
-        <td>
-            @if (item.NgayKetThuc.HasValue)
-            {
-                @item.NgayKetThuc.Value.ToString("dd/MM/yyyy")
-            }
-        </td>
+                <div class="flight-details">
+                    <strong>Giá thương gia: </strong> 
+                    @Html.DisplayFor(modelItem => item.GiaThuongGia)
+                </div>
+            </div>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.SoGheTrong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoGheVipTrong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SanBay.TenSanBay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SanBay1.TenSanBay)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.ChuyenBayID }) |
-            @Html.ActionLink("Buy Ticket", "BuyTicket", new { id = item.ChuyenBayID }) 
-        </td>
-    </tr>
-}
+            <div>
+                <div class="flight-time">
+                    <strong> Giờ khởi hành: </strong>@Html.DisplayFor(modelItem => item.GioKhoiHanh)
+                </div>
+                <div class="flight-time">
+                    <strong> Giờ đến: </strong>@Html.DisplayFor(modelItem => item.GioKetThuc)
+                </div>
+            </div>
 
-</table>
+
+            <div class="flight-actions">
+                @Html.ActionLink("Details", "Details", new { id = item.ChuyenBayID })
+                @Html.ActionLink("Buy Ticket", "DatVe", "ChuyenBay", new { id = item.ChuyenBayID }, null)
+            </div>
+        </div>
+    }
+</div>
+

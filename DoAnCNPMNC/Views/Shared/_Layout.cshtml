@@ -59,18 +59,18 @@
                                 }
                                 else
                                 {
-                                    <li style="display: inline-block; padding-right:10px; margin: auto; font-size: 20px; " class="nav-link dropdown ">
-                                        <span class="nav-link dropdown-toggle link-dark" data-bs-toggle="dropdown">@Session["NameKH"]</span>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a style="font-size:17px;" class="dropdown-item" href="@Url.Action("Detail", "TrangChu", new { khID = Session["KhID"]})">
-                                                    Thông tin tài khoản
-                                                </a>
-                                            </li>
-                                            <li><a style="font-size:17px;" class="dropdown-item" href="~/Home/LichSu">Lịch sử dat ve</a></li>
-                                            <li><a style="font-size:17px;" class="dropdown-item" href="~/TrangChu/Logout">Đăng xuất</a></li>
-                                        </ul>
-                                    </li>
+                                <li style="display: inline-block; padding-right:10px; margin: auto; font-size: 20px; " class="nav-link dropdown ">
+                                    <span class="nav-link dropdown-toggle link-dark" data-bs-toggle="dropdown">@Session["NameKH"]</span>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a style="font-size:17px;" class="dropdown-item" href="@Url.Action("Detail", "TrangChu", new { khID = Session["KhID"]})">
+                                                Thông tin tài khoản
+                                            </a>
+                                        </li>
+                                        <li><a style="font-size:17px;" class="dropdown-item" href="~/Home/LichSu">Lịch sử dat ve</a></li>
+                                        <li><a style="font-size:17px;" class="dropdown-item" href="~/TrangChu/Logout">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
                                 }
                                 <li class="search-4bd">
                                     <a href="#">
@@ -89,7 +89,7 @@
                                     </div>
                                 </li>
                             </ul>
-                    </div>
+                        </div>
                     <ul class="nav-oel navbar-nav-xtn nav-jnx">
                         <li class="dropdown-js7">
                             <a class="dropdown-kom" href="/vn/vi/plan-book">
@@ -145,7 +145,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        Trách nhiệm xã hội
+                                        Đặt vé
                                     </a>
                                 </li>
                                 <li>

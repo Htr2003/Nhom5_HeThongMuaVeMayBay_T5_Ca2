@@ -6,7 +6,7 @@
     <link href="~/Content/bootstrap.min.css" />
 }
 
-<div style="padding: 0 300px 0 300px">
+<div style="padding: 0 250px 0 250px">
 
     <p>
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
@@ -27,7 +27,10 @@
                         Ngày khởi hành
                     </th>
                     <th>
-                        Số ghế
+                        Số ghế phổ thông
+                    </th>
+                    <th>
+                        Số ghế thương gia
                     </th>
                     <th>
                         Trạng thái
@@ -49,7 +52,10 @@
                             @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TotalGheTrongAndVip)
+                            @Html.DisplayFor(modelItem => item.SoGheTrong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoGheVipTrong)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TrangThai)

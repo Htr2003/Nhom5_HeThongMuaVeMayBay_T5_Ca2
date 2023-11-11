@@ -139,5 +139,18 @@ namespace DoAnCNPMNC.Controllers
             var sort = db.ChuyenBay.OrderByDescending(x => x.GioKhoiHanh).ToList();
             return View(sort.ToList());
         }
+
+        public ActionResult Search(string query)
+        {
+            // Add logic to query the ChuyenBay model based on the search query
+            // For example, using Entity Framework to query the database
+            var searchResults = db.ChuyenBay
+                .Where(cb => cb.SanKhoiHanhID.Contains(query) 
+                          || cb.SanDenID.Contains(query) 
+                          || cb.NgayKhoiHanh.ToString().Contains(query))
+                .ToList();
+
+            return View("SearchResults", searchResults);
+        }
     }
 }
