@@ -152,5 +152,20 @@ namespace DoAnCNPMNC.Controllers
 
             return View("SearchResults", searchResults);
         }
+
+        [HttpGet]
+        public ActionResult DatVe()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DatVe(Ve model)
+        {
+
+
+            return View(model);
+        }
     }
 }
