@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoAnCNPMNC.Models;
+using Hangfire;
 
 namespace DoAnCNPMNC.Controllers
 {
@@ -15,6 +16,14 @@ namespace DoAnCNPMNC.Controllers
         private DBRedNitEntities db = new DBRedNitEntities();
 
         // GET: ChuyenBays
+        [AutomaticRetry(Attempts = 3)]
+        public void UpdateChuyenBayStatusJob()
+        {
+            using (var context = new DBRedNitEntities())
+            {
+                context.UpdateChuyenBayStatus();
+            }
+        }
         public ActionResult Index()
         {
             var chuyenBay = db.ChuyenBay.Include(c => c.SanBay).Include(c => c.SanBay1);
@@ -53,9 +62,17 @@ namespace DoAnCNPMNC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ChuyenBay.Add(chuyenBay);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (chuyenBay.NgayKhoiHanh < DateTime.Now.Date || chuyenBay.NgayKetThuc < DateTime.Now.Date)
+                {
+                    ModelState.AddModelError(string.Empty, "Ngày khởi hành và ngày kết thúc không được trước ngày hiện tại");
+                }
+                else
+                {
+                    chuyenBay.TrangThai = "Chưa Bay";
+                    db.ChuyenBay.Add(chuyenBay);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.SanKhoiHanhID = new SelectList(db.SanBay, "SanBayID", "TenSanBay", chuyenBay.SanKhoiHanhID);
@@ -154,18 +171,51 @@ namespace DoAnCNPMNC.Controllers
         }
 
         [HttpGet]
-        public ActionResult DatVe()
+        public ActionResult DatVe(int chuyenBayId)
         {
-
-            return View();
+            var chuyenbay = db.ChuyenBay.Find(chuyenBayId);
+            return View(chuyenbay);
         }
 
         [HttpPost]
-        public ActionResult DatVe(Ve model)
+        public ActionResult DatVe(Ve ve, KhachHang kh)
         {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(kh.HoTen))
+                    ModelState.AddModelError(string.Empty, "Khong duoc de trong ho ten");
 
+                if (string.IsNullOrEmpty(kh.NgaySinh.ToString()))
+                    ModelState.AddModelError(string.Empty, "khong duoc de trong ngay sinh");
 
-            return View(model);
+                if (string.IsNullOrEmpty(kh.Sdt))
+                    ModelState.AddModelError(string.Empty, "khong duoc de trong sdt");
+
+                if (Session["NameKH"] != null)
+                {
+                    var currentKH = (int)Session["KhID"];
+                    ve.KhID = currentKH;
+                }
+
+                else
+                {
+                    db.KhachHang.Add(kh);
+                    db.SaveChanges();
+                    ve.KhID = kh.KhID;
+                }
+
+                var chuyenbayID = (int)Session["chuyenbayId"];
+                var c = db.ChuyenBay.Find(chuyenbayID);
+                ve.ChuyenBayID = c.ChuyenBayID;
+
+                db.Ve.Add(ve);
+                db.SaveChanges();
+                Session["Ve"] = ve.VeID;
+
+                return View("ThanhToan");
+            }
+
+            return View();
         }
     }
 }

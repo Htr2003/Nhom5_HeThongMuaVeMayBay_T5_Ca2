@@ -43,7 +43,7 @@
 
             <div class="flight-actions">
                 @Html.ActionLink("Details", "Details", new { id = item.ChuyenBayID })
-                @Html.ActionLink("Buy Ticket", "DatVe", "ChuyenBay", new { id = item.ChuyenBayID }, null)
+                @Html.ActionLink("Buy Ticket", "DatVe", "ChuyenBays", new { chuyenBayId = item.ChuyenBayID }, null)
             </div>
         </div>
     }

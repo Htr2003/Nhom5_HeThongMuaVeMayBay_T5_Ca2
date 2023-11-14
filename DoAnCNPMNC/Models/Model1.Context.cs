@@ -12,7 +12,8 @@ namespace DoAnCNPMNC.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Linq;
+
     public partial class DBRedNitEntities : DbContext
     {
         public DBRedNitEntities()
@@ -24,7 +25,23 @@ namespace DoAnCNPMNC.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public void UpdateChuyenBayStatus()
+        {
+            var now = DateTime.Now;
+
+            var chuyenBaysToUpdate = ChuyenBay
+                .Where(c => c.NgayKhoiHanh <= now && now <= c.NgayKetThuc && c.GioKhoiHanh <= now.TimeOfDay && c.TrangThai != "cất cánh")
+                .ToList();
+
+            foreach (var chuyenBay in chuyenBaysToUpdate)
+            {
+                chuyenBay.TrangThai = "cất cánh";
+            }
+
+            SaveChanges();
+        }
+
         public virtual DbSet<AdminUser> AdminUser { get; set; }
         public virtual DbSet<ChuyenBay> ChuyenBay { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }

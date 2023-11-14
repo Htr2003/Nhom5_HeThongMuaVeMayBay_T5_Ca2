@@ -1,0 +1,81 @@
+﻿@model DoAnCNPMNC.Models.ChuyenBay
+
+@{
+    ViewBag.Title = "BookingInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/stylePro.css" rel="stylesheet" />
+}
+
+<div class="parent-container">
+    <div class="form-container">
+        @using (Html.BeginForm("DatVe", "ChuyenBays", new { chuyenBayId = Model.ChuyenBayID }, FormMethod.Post))
+        {
+            <h2>Thông tin cá nhân</h2>
+            <p>@ViewBag.SuccessMessage</p>
+            <div class="form-group">
+                <label for="hoTen">Họ và tên:</label>
+                <input type="text" id="hoTen" name="HoTen" required>
+            </div>
+
+            <div class="form-group">
+                <label for="soDienThoai">Số điện thoại:</label>
+                <input type="tel" id="soDienThoai" name="Sdt" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ghiChu">Giới tính</label>
+                <input id="ghiChu" name="GioiTinh" rows="3">
+            </div>
+
+            <input type="submit" value="Xác nhận">
+        }
+
+    </div>
+
+
+    <div class="formInfo-container">
+        @using (Html.BeginForm("BookingInfo", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.ChuyenBayID)
+            <h2>Booking Details</h2>
+            <div class="form-group">
+                <label for="from">Sân khởi hành: </label>
+                <input value="@Html.DisplayFor(model => model.SanBay.TenSanBay)" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="to">Sân đến: </label>
+                <input value="@Html.DisplayFor(model => model.SanBay1.TenSanBay)" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="datetime">Ngày khởi hành: </label>
+                <input value="@Html.DisplayFor(model => model.NgayKhoiHanh)" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="datetime">giờ kết thúc: </label>
+                <input value="@Html.DisplayFor(model => model.NgayKetThuc)" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="datetime">giờ khởi hành: </label>
+                <input value="@Html.DisplayFor(model => model.GioKhoiHanh)" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="datetime">giờ kết thúc: </label>
+                <input value="@Html.DisplayFor(model => model.GioKetThuc)" readonly>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
