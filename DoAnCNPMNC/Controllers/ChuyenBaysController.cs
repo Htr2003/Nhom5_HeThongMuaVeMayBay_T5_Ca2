@@ -68,7 +68,7 @@ namespace DoAnCNPMNC.Controllers
                 }
                 else
                 {
-                    chuyenBay.TrangThai = "Chưa Bay";
+                    chuyenBay.TrangThai = "Chưa bay";
                     db.ChuyenBay.Add(chuyenBay);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -216,6 +216,39 @@ namespace DoAnCNPMNC.Controllers
             }
 
             return View();
+        }
+        public ActionResult ThanhToan()
+        {
+            return View();
+        }
+
+        public ActionResult LichSuVe_Admin()
+        {
+            var ve = db.Ve.Include("ChuyenBay").Include("KhachHang").ToList();
+            return View(ve);
+        }
+
+        [HttpPost]
+        public ActionResult HoanTatChuyenBay(int veId)
+        {
+            try
+            {
+                var ve = db.Ve.Find(veId);
+
+                if (ve == null)
+                {
+                    return HttpNotFound();
+                }
+                ve.ChuyenBay.TrangThai = "Hoàn tất";
+                db.SaveChanges();
+
+                return View("LichSuVe_Admin");
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                return Json(new { success = false, error = ex.Message });
+            }
         }
     }
 }

@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <a href="~/Users/TaiXe" class="navbar-brand">
                     <img class="navbar-brand" src="~/Content/img/logo.png" alt="Alternate Text"
-                         style="width: 200px; height:200px; margin-left:200px; margin-right:100px;"/>
+                         style="width: 200px; height:200px; margin-left:200px; margin-right:100px;" />
                 </a>
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav nav-pills">
@@ -28,7 +28,7 @@
                             <a id="nd" class="nav-link" href="~/Users/DanhSachNguoiDung"><b>Danh sách khách hàng</b></a>
                         </li>
                         <li class="nav-item col-lg-4 col-3">
-                            <a id="nd" class="nav-link" href="#"><b>Danh sách chuyến bay</b></a>
+                            <a id="nd" class="nav-link" href="~/ChuyenBays/LichSuVe_Admin"><b>Danh sách chuyến bay</b></a>
                         </li>
                         <li class="nav-item col-lg-4 col-3">
                             <a id="nd" class="nav-link" href="~/ChuyenBays/Index"><b>Quản lý chuyến bay</b></a>
@@ -62,5 +62,6 @@
     <div>
         @RenderBody()
     </div>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

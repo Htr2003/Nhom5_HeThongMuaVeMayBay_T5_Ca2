@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DoAnCNPMNC.Models.Ve>
+
+@{
+    ViewBag.Title = "LichSuVe_Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <h2 class="text-center mt-4 mb-4">Lich sử vé của khách hàng</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã Vé</th>
+                <th>Mã chuyến bay</th>
+                <th>Tên Khách hàng</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.VeID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBayID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.KhachHang.HoTen)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBay.TrangThai)</td>
+                    <td>
+                        @if (item.ChuyenBay.TrangThai == "Cất cánh")
+                        {
+                           <form method="post" action="@Url.Action("HoanTatChuyenBay", "ChuyenBays")">
+                               @Html.Hidden("VeID", item.VeID)
+                               <button type="submit" class="btn btn-primary">Hoàn tất</button>
+                           </form>
+                        }
+                        else
+                        {
+                            <span class="badge badge-success">@item.ChuyenBay.TrangThai</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

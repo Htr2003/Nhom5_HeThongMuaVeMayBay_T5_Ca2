@@ -31,12 +31,12 @@ namespace DoAnCNPMNC.Models
             var now = DateTime.Now;
 
             var chuyenBaysToUpdate = ChuyenBay
-                .Where(c => c.NgayKhoiHanh <= now && now <= c.NgayKetThuc && c.GioKhoiHanh <= now.TimeOfDay && c.TrangThai != "cất cánh")
+                .Where(c => c.NgayKhoiHanh <= now && now <= c.NgayKetThuc && c.GioKhoiHanh <= now.TimeOfDay && c.TrangThai != "Chưa bay")
                 .ToList();
 
             foreach (var chuyenBay in chuyenBaysToUpdate)
             {
-                chuyenBay.TrangThai = "cất cánh";
+                chuyenBay.TrangThai = "Cất cánh";
             }
 
             SaveChanges();
