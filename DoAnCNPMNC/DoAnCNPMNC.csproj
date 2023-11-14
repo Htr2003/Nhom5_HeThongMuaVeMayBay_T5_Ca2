@@ -298,6 +298,7 @@
     <Content Include="Views\TrangChu\DanhSachChuyenBay.cshtml" />
     <Content Include="Views\ChuyenBays\DatVe.cshtml" />
     <Content Include="Views\ChuyenBays\LichSuVe_Admin.cshtml" />
+    <Content Include="Views\ChuyenBays\LichSuVe_KhachHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

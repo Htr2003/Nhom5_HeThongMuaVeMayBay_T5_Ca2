@@ -250,5 +250,11 @@ namespace DoAnCNPMNC.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
+
+        public ActionResult LichSuVe_KhachHang()
+        {
+            var lichsu = db.Ve.Include("ChuyenBay").ToList();
+            return View(lichsu);
+        }
     }
 }
