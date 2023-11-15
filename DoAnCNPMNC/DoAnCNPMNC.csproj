@@ -186,6 +186,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -299,6 +300,7 @@
     <Content Include="Views\ChuyenBays\DatVe.cshtml" />
     <Content Include="Views\ChuyenBays\LichSuVe_Admin.cshtml" />
     <Content Include="Views\ChuyenBays\LichSuVe_KhachHang.cshtml" />
+    <Content Include="Views\TrangChu\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

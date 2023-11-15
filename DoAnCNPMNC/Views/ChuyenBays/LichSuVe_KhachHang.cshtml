@@ -5,29 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Lịch Sử Đặt Xe</h2>
-    <table class="table">
-        <thead>
+<div class="container mt-5" style="font-size:15px;">
+    <h2 class="text-center mb-4">Lịch Sử Đặt Vé</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
             <tr>
                 <th>Sân khởi hành</th>
                 <th>Sân đến</th>
                 <th>Giờ khởi hành</th>
                 <th>Ngày khởi hành</th>
-                <th>Trạng thái</th>
+                <th>Trạng thái vé</th>
+                <th>Trạng thái chuyến bay</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="animate__animated animate__fadeIn">
                     <td>@Html.DisplayFor(modelItem => item.ChuyenBay.SanBay.TenSanBay)</td>
                     <td>@Html.DisplayFor(modelItem => item.ChuyenBay.SanBay1.TenSanBay)</td>
                     <td>@Html.DisplayFor(modelItem => item.ChuyenBay.GioKhoiHanh)</td>
                     <td>@Html.DisplayFor(modelItem => item.ChuyenBay.NgayKhoiHanh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TrangThaiVe)</td>
                     @if (item.ChuyenBay.TrangThai == "Đã hủy")
                     {
                         <td>Đã hủy</td>
@@ -43,7 +47,9 @@
                     else
                     {
                         <td>Chưa bay</td>
-                        <td><button class="btn btn-danger" onclick="HuyDatXe(@item.ChuyenBay.ChuyenBayID)">Hủy</button></td>
+                        <td style="height:50px;">
+                            <button class="btn btn-danger" onclick="HuyDatVe(@item.VeID)">Hủy</button>
+                        </td>
                     }
                 </tr>
             }
@@ -51,16 +57,33 @@
     </table>
 </div>
 
-@section scripts {
-    <script>
-        function HuyDatXe(datxeID) {
-            if (confirm('Bạn có chắc chắn muốn hủy chuyến bay này?')) {
-                window.location.href = '@Url.Action("HuyDatVe", "ChuyenBays")/' + datxeID;
-                location.reload();
-            }
+<script>
+    function HuyDatVe(veId) {
+        if (confirm('Bạn có chắc chắn muốn hủy chuyến bay này?')) {
+            $.ajax({
+                url: '@Url.Action("HuyDatVe", "ChuyenBays")',
+                type: 'POST',
+                data: { veId: veId },
+                success: function (data) {
+                    if (data.success) {
+                        // Update the status in the corresponding row
+                        var statusCell = $('#statusCell_' + veId); // Assuming you have an element with this ID
+                        statusCell.text(data.updatedStatus);
+
+                        // Add fade-out animation
+                        statusCell.addClass('animate__animated animate__fadeOut');
+                    } else {
+                        alert('Failed to cancel ticket: ' + data.error);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while processing your request.');
+                }
+            });
         }
-    </script>
-}
+    }
+</script>
+
 
 
 

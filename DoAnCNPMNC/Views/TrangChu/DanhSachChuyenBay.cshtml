@@ -4,6 +4,9 @@
     ViewBag.Title = "DanhSachChuyenBay";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link rel="stylesheet" href="~/Content/listFlight.css" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
 }
 
 <h2 style="text-align: center; padding: 10px 0 20px 0; color: #C7626F; ">Danh Sách Chuyến Bay</h2>
@@ -16,17 +19,17 @@
                 <div class="flight-details ">
                     <strong> Sân khởi hành: </strong>@Html.DisplayFor(modelItem => item.SanBay.TenSanBay)
                 </div>
-                <div class="flight-details ">
+                <div class="flight-details" style="margin-right:30px;">
                     <strong> Sân đến: </strong>@Html.DisplayFor(modelItem => item.SanBay1.TenSanBay)
                 </div>
 
                 <div class="flight-details">
-                    <strong>Giá phổ thông: </strong> 
+                    <strong>Giá phổ thông: </strong>
                     @Html.DisplayFor(modelItem => item.GiaPhoThong)
                 </div>
 
                 <div class="flight-details">
-                    <strong>Giá thương gia: </strong> 
+                    <strong>Giá thương gia: </strong>
                     @Html.DisplayFor(modelItem => item.GiaThuongGia)
                 </div>
             </div>
@@ -42,10 +45,32 @@
 
 
             <div class="flight-actions">
-                @Html.ActionLink("Details", "Details", new { id = item.ChuyenBayID })
+                @Html.ActionLink("Details", "ChiTiet", "TrangChu", new { chuyenBayId = item.ChuyenBayID },
+                                                                     new { onclick = "openModal(" + item.ChuyenBayID + ")" })
                 @Html.ActionLink("Buy Ticket", "DatVe", "ChuyenBays", new { chuyenBayId = item.ChuyenBayID }, null)
             </div>
         </div>
     }
 </div>
+
+@section scripts {
+    <script>
+        function openModal(chuyenBayId) {
+            $.ajax({
+                url: '@Url.Action("ChiTiet", "TrangChu")',
+                type: 'GET',
+                data: { chuyenBayId: chuyenBayId },
+                success: function (data) {
+                    $("#myModal").html(data);
+                    $("#myModal").css("display", "block");
+                },
+                error: function () {
+                    alert('An error occurred while loading details.');
+                }
+            });
+        }
+    </script>
+}
+
+
 

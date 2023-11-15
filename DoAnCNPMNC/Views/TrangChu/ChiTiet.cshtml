@@ -1,0 +1,65 @@
+﻿@model DoAnCNPMNC.Models.ChuyenBay
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        float: right;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Details</h2>
+
+        <div class="flight-details">
+            <strong>Sân khởi hành:</strong> @Html.DisplayFor(model => model.SanBay.TenSanBay)
+        </div>
+
+        <div class="flight-details">
+            <strong>Sân đến:</strong> @Html.DisplayFor(model => model.SanBay1.TenSanBay)
+        </div>
+
+        <div class="flight-details">
+            <strong>Giờ khởi hành:</strong> @Html.DisplayFor(model => model.GioKhoiHanh)
+        </div>
+
+        <div class="flight-details">
+            <strong>Giờ đến:</strong> @Html.DisplayFor(model => model.GioKetThuc)
+        </div>
+
+
+
+    </div>
+</div>
+
+<script>
+    // Close the modal
+    function closeModal() {
+        alert("Closing modal");
+        $("#myModal").css("display", "none");
+    }
+</script>
+

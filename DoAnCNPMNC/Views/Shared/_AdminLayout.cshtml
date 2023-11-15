@@ -4,64 +4,95 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/TaiXeStyle.css" rel="stylesheet" />
+    <link href="~/Content/AdminStyle.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-        #nd {
-            font-size: 20px;
-            margin-right: 20px;
+        .nav-option.selected {
+            border-left: 5px solid #004578;
+            background-color: #004578;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="bs_header" style="grid-area:center;">
-        <nav class="navbar navbar-expand-sm bg-white navbar-light">
-            <div class="container-fluid">
-                <a href="~/Users/TaiXe" class="navbar-brand">
-                    <img class="navbar-brand" src="~/Content/img/logo.png" alt="Alternate Text"
-                         style="width: 200px; height:200px; margin-left:200px; margin-right:100px;" />
-                </a>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav nav-pills">
-                        <li class="nav-item col-lg-4 col-3">
-                            <a id="nd" class="nav-link" href="~/Users/DanhSachNguoiDung"><b>Danh sách khách hàng</b></a>
-                        </li>
-                        <li class="nav-item col-lg-4 col-3">
-                            <a id="nd" class="nav-link" href="~/ChuyenBays/LichSuVe_Admin"><b>Danh sách chuyến bay</b></a>
-                        </li>
-                        <li class="nav-item col-lg-4 col-3">
-                            <a id="nd" class="nav-link" href="~/ChuyenBays/Index"><b>Quản lý chuyến bay</b></a>
-                        </li>
-                        @if (Session["Admin"] == null)
-                        {
-                            <li class="nav-link dropdown col-lg-4 col-3">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="~/TrangChu/Login"><b>Tài khoản</b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="~/TrangChu/Login">Đăng nhập</a></li>
-                                    <li><a class="dropdown-item" href="~/TrangChu/Register">Đăng kí</a></li>
-                                </ul>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="display: inline-block; margin: auto; font-size: 20px; " class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><b>@Session["HoTenAdmin"]</b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="@Url.Action("#", "#", new { TaiXeID = Session["Admin"]})">Thông tin tài khoản</a></li>
-                                    <li><a class="dropdown-item" href="~/TrangChu/Logout">Đăng xuất</a></li>
-                                </ul>
-                            </li>
-                        }
-                    </ul>
-                </div>
+    <header>
+        <div class="logosec">
+            <a href="~/TrangChu/Index" style="text-decoration: none;">
+                <img src="~/Content/img/logo.png" />
+            </a>
+        </div>
+
+        <div class="message">
+            <div class="account">
+                @if (Session["Admin"] == null)
+                {
+                    <li class="nav-link dropdown col-lg-4 col-3">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="~/TrangChu/Login"><b>Tài khoản</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="~/TrangChu/Login">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="~/TrangChu/Register">Đăng kí</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li style="display: inline-block; margin: auto; font-size: 20px; " class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><b>@Session["HoTenAdmin"]</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="@Url.Action("#", "#", new { TaiXeID = Session["Admin"]})">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="~/TrangChu/Logout">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                }
             </div>
-        </nav>
+        </div>
+    </header>
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <div class="nav-upper-options">
+                    <div class="nav-option" id="option1" onclick="selectOption('option1')">
+                        <img src="~/Content/img/user.png" />
+                        <a href="~/Users/DanhSachNguoiDung">
+                            <h3> Danh sách khách hàng</h3>
+                        </a>
+                    </div>
+
+                    <div class="nav-option" id="option2" onclick="selectOption('option2')">
+                        <img src="~/Content/img/departures.png" />
+                        <a href="~/ChuyenBays/LichSuVe_Admin">
+                            <h3> Danh sách chuyến bay</h3>
+                        </a>
+                    </div>
+
+                    <div class="nav-option" id="option3" onclick="selectOption('option3')">
+                        <img src="~/Content/img/maintenance.png" />
+                        <a href="~/ChuyenBays/Index">
+                            <h3> Quản lý chuyến bay</h3>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
     </div>
-    <hr />
-    <div>
-        @RenderBody()
-    </div>
+    <script>
+        function selectOption(optionId) {
+            // Lấy tất cả các options
+            var allOptions = document.querySelectorAll('.nav-option');
+
+            // Loại bỏ lớp chọn từ tất cả các options
+            allOptions.forEach(function (option) {
+                option.classList.remove('selected');
+            });
+
+            // Thêm lớp chọn vào option đã chọn
+            document.getElementById(optionId).classList.add('selected');
+        }
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

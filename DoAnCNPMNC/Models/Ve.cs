@@ -21,6 +21,7 @@ namespace DoAnCNPMNC.Models
         public Nullable<double> TongTien { get; set; }
         public string LoaiVe { get; set; }
         public string HangGhe { get; set; }
+        public string TrangThaiVe { get; set; }
     
         public virtual ChuyenBay ChuyenBay { get; set; }
         public virtual KhachHang KhachHang { get; set; }

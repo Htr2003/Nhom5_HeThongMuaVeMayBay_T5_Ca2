@@ -121,5 +121,18 @@ namespace DoAnCNPMNC.Controllers
             return View(chuyenBay.ToList());
         }
 
+        [HttpGet]
+        public ActionResult ChiTiet(int chuyenBayId)
+        {
+            var chuyenBay = db.ChuyenBay.Find(chuyenBayId);
+
+            if (chuyenBay == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("ChiTiet", chuyenBay);
+        }
+
     }
 }

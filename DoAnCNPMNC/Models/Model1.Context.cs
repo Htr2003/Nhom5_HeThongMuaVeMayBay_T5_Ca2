@@ -26,12 +26,12 @@ namespace DoAnCNPMNC.Models
             throw new UnintentionalCodeFirstException();
         }
 
-        public void UpdateChuyenBayStatus()
+        internal void UpdateChuyenBayStatus()
         {
             var now = DateTime.Now;
 
             var chuyenBaysToUpdate = ChuyenBay
-                .Where(c => c.NgayKhoiHanh <= now && now <= c.NgayKetThuc && c.GioKhoiHanh <= now.TimeOfDay && c.TrangThai != "Chưa bay")
+                .Where(c => c.NgayKhoiHanh <= now && now <= c.NgayKetThuc && c.GioKhoiHanh <= now.TimeOfDay && c.TrangThai == "Chưa bay")
                 .ToList();
 
             foreach (var chuyenBay in chuyenBaysToUpdate)

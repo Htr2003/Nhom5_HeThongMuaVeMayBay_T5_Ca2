@@ -74,6 +74,7 @@
           <Property Name="TongTien" Type="float" />
           <Property Name="LoaiVe" Type="nvarchar" MaxLength="20" />
           <Property Name="HangGhe" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrangThaiVe" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="fk_chuyenbay_sanbay">
           <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
@@ -228,6 +229,7 @@
           <Property Name="HangGhe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ChuyenBay" Relationship="Self.fk_ve_chuyenbay" FromRole="Ve" ToRole="ChuyenBay" />
           <NavigationProperty Name="KhachHang" Relationship="Self.fk_ve_khach" FromRole="Ve" ToRole="KhachHang" />
+          <Property Name="TrangThaiVe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="fk_chuyenbay_sanbay">
           <End Role="SanBay" Type="Self.SanBay" Multiplicity="0..1" />
@@ -373,6 +375,7 @@
           <EntitySetMapping Name="Ve">
             <EntityTypeMapping TypeName="DBRedNitModel.Ve">
               <MappingFragment StoreEntitySet="Ve">
+                <ScalarProperty Name="TrangThaiVe" ColumnName="TrangThaiVe" />
                 <ScalarProperty Name="VeID" ColumnName="VeID" />
                 <ScalarProperty Name="ChuyenBayID" ColumnName="ChuyenBayID" />
                 <ScalarProperty Name="KhID" ColumnName="KhID" />

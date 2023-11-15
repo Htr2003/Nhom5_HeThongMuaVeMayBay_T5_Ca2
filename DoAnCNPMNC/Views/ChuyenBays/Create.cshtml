@@ -4,22 +4,42 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     <link href="~/Content/bootstrap.min.css" />
-    <link href="~/Content/createStyle.css" rel="stylesheet"/>
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
+            .form-group:last-child {
+                margin-right: 0;
+            }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
 }
 
 
-<div class="form-box">
-
+<div class="container">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal" >
+        <div class="form-horizontal">
             <h4 style="text-align:center">Chuyến Bay</h4>
-            
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group" style="padding:10px;">
+            <div class="form-group" style="width: 45%">
                 Sân khởi hành
                 <div class="col-md-10">
                     @Html.DropDownList("SanKhoiHanhID", null, htmlAttributes: new { @class = "form-control" })
@@ -27,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="form-group " style="padding:10px;">
+            <div class="form-group " style="width: 45%">
                 Sân đến
                 <div class="col-md-10">
                     @Html.DropDownList("SanDenID", null, htmlAttributes: new { @class = "form-control" })
@@ -35,7 +55,7 @@
                 </div>
             </div>
 
-            <div class="form-group " style="padding:10px;">
+            <div class="form-group " >
                 Giờ khởi hành
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.GioKhoiHanh, new { htmlAttributes = new { @class = "form-control", type = "time" } })
@@ -43,15 +63,15 @@
                 </div>
             </div>
 
-            <div class="form-group " style="padding:10px;">
+            <div class="form-group ">
                 Giờ kết thúc
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.GioKetThuc, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                     @Html.ValidationMessageFor(model => model.GioKetThuc, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group" style="padding:10px;">
+            
+            <div class="form-group" style="width: 25%">
                 Ngày khởi hành
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.NgayKhoiHanh, new { htmlAttributes = new { @class = "form-control", type = "date" } })
@@ -59,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="padding:10px;">
+            <div class="form-group" style="width: 25%">
                 Ngày Kết thúc
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", type = "date" } })
@@ -67,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="padding:10px;">
+            <div class="form-group">
                 Số ghế Trống
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.SoGheTrong, new { htmlAttributes = new { @class = "form-control" } })
@@ -75,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="padding:10px;">
+            <div class="form-group" >
                 Số ghế Vip Trống
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.SoGheVipTrong, new { htmlAttributes = new { @class = "form-control" } })
@@ -83,9 +103,7 @@
                 </div>
             </div>
 
-         
-
-            <div class="form-group" style="padding:10px;">
+            <div class="form-group" >
                 <div class="col-md-10 offset-md-2">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>

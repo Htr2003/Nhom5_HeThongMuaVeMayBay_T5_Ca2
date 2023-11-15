@@ -207,6 +207,7 @@ namespace DoAnCNPMNC.Controllers
                 var chuyenbayID = (int)Session["chuyenbayId"];
                 var c = db.ChuyenBay.Find(chuyenbayID);
                 ve.ChuyenBayID = c.ChuyenBayID;
+                ve.TrangThaiVe = "Đang Chờ";
 
                 db.Ve.Add(ve);
                 db.SaveChanges();
@@ -240,6 +241,11 @@ namespace DoAnCNPMNC.Controllers
                     return HttpNotFound();
                 }
                 ve.ChuyenBay.TrangThai = "Hoàn tất";
+                if(ve.TrangThaiVe == "Đang chờ")
+                {
+                    ve.TrangThaiVe = "Hoàn tất";
+                    db.SaveChanges();
+                }
                 db.SaveChanges();
 
                 return View("LichSuVe_Admin");
@@ -256,6 +262,8 @@ namespace DoAnCNPMNC.Controllers
             var lichsu = db.Ve.Include("ChuyenBay").ToList();
             return View(lichsu);
         }
+
+        [HttpPost]
         public ActionResult HuyDatVe(int veId)
         {
             try
@@ -264,18 +272,24 @@ namespace DoAnCNPMNC.Controllers
 
                 if (ve == null)
                 {
-                    return HttpNotFound();
+                    // Log the veId to understand what's being passed
+                    Console.WriteLine($"Failed to find Ve with ID: {veId}");
+                    return Json(new { success = false, error = "Ticket not found." });
                 }
-                ve.ChuyenBay.TrangThai = "Hủy";
+
+                ve.TrangThaiVe = "Hủy";
                 db.SaveChanges();
 
-                return View("LichSuVe_KhachHang");
+                // Return updated ticket information
+                return Json(new { success = true, updatedStatus = ve.TrangThaiVe });
             }
             catch (Exception ex)
             {
-                // Handle exception
+                // Log the exception for further investigation
+                Console.WriteLine($"Exception while canceling ticket: {ex.Message}");
                 return Json(new { success = false, error = ex.Message });
             }
         }
+
     }
 }

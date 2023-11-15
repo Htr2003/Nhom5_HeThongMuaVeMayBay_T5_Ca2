@@ -3,15 +3,38 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dl-horizontal {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        dt {
+            width: 45%;
+            margin-bottom: 5px;
+        }
+
+        dd {
+            width: 50%;
+            margin-bottom: 5px;
+        }
+    </style>
 }
 
 
-<div>
-    <h4>ChuyenBay</h4>
-    <hr />
+<div class="container">
+    <h4 style="text-align:center">Chuyến Bay</h4>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.GioKhoiHanh)
+            Giờ khởi hành
         </dt>
 
         <dd>
@@ -19,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GioKetThuc)
+            Giờ kết thúc
         </dt>
 
         <dd>
@@ -27,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NgayKhoiHanh)
+            Ngày khởi hành
         </dt>
 
         <dd>
@@ -35,7 +58,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
+            Ngày kết thúc
         </dt>
 
         <dd>
@@ -43,7 +66,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SoGheTrong)
+            Số ghế trống
         </dt>
 
         <dd>
@@ -51,7 +74,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SoGheVipTrong)
+            Số ghế vip trống
         </dt>
 
         <dd>
@@ -59,7 +82,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
+            Trạng thái
         </dt>
 
         <dd>
@@ -67,7 +90,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SanBay.TenSanBay)
+            Sân bay đi
         </dt>
 
         <dd>
@@ -75,16 +98,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SanBay1.TenSanBay)
+            Sân bay đến
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SanBay1.TenSanBay)
         </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ChuyenBayID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p style="padding: 20px">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ChuyenBayID }, new { @class = "btn", style = "background-color: #4CAF50;\r\n            color: white;\r\n            border: none;\r\n            padding: 8px 20px;\r\n            text-align: center;\r\n            text-decoration: none;\r\n            display: inline-block;\r\n            font-size: 15px;\r\n            margin: 4px 2px;\r\n            cursor: pointer;\r\n            border-radius: 6px;\r\n          vertical-align: middle;" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary", style = "vertical-align: middle;" })
 </p>
