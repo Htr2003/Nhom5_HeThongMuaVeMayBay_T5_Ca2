@@ -256,5 +256,26 @@ namespace DoAnCNPMNC.Controllers
             var lichsu = db.Ve.Include("ChuyenBay").ToList();
             return View(lichsu);
         }
+        public ActionResult HuyDatVe(int veId)
+        {
+            try
+            {
+                var ve = db.Ve.Find(veId);
+
+                if (ve == null)
+                {
+                    return HttpNotFound();
+                }
+                ve.ChuyenBay.TrangThai = "Hủy";
+                db.SaveChanges();
+
+                return View("LichSuVe_KhachHang");
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
     }
 }

@@ -1,9 +1,65 @@
-﻿@model DoAnCNPMNC.Models.Ve
+﻿@model IEnumerable<DoAnCNPMNC.Models.Ve>
 
 @{
     ViewBag.Title = "LichSuVe_KhachHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Lịch Sử Đặt Xe</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sân khởi hành</th>
+                <th>Sân đến</th>
+                <th>Giờ khởi hành</th>
+                <th>Ngày khởi hành</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBay.SanBay.TenSanBay)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBay.SanBay1.TenSanBay)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBay.GioKhoiHanh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ChuyenBay.NgayKhoiHanh)</td>
+                    @if (item.ChuyenBay.TrangThai == "Đã hủy")
+                    {
+                        <td>Đã hủy</td>
+                    }
+                    else if (item.ChuyenBay.TrangThai == "Cất cánh")
+                    {
+                        <td>Cất cánh</td>
+                    }
+                    else if (item.ChuyenBay.TrangThai == "Hoàn Tất")
+                    {
+                        <td>Hoàn Tất</td>
+                    }
+                    else
+                    {
+                        <td>Chưa bay</td>
+                        <td><button class="btn btn-danger" onclick="HuyDatXe(@item.ChuyenBay.ChuyenBayID)">Hủy</button></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts {
+    <script>
+        function HuyDatXe(datxeID) {
+            if (confirm('Bạn có chắc chắn muốn hủy chuyến bay này?')) {
+                window.location.href = '@Url.Action("HuyDatVe", "ChuyenBays")/' + datxeID;
+                location.reload();
+            }
+        }
+    </script>
 }
 
 
