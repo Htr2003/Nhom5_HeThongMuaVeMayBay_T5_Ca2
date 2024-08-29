@@ -17,15 +17,6 @@ Dự án này giúp người dùng dễ dàng tìm kiếm, đặt vé máy bay v
 - Quản lý thông tin đặt chỗ
 - Thanh toán trực tuyến
 
-## Hướng Dẫn Cài Đặt
-
-1. Sao chép dự án từ GitHub: https://github.com/Htr2003/Nhom5_HeThongMuaVeMayBay_T5_Ca2
-2. Cài đặt môi trường phát triển (ví dụ: Node.js và npm).
-3. Cài đặt các gói phụ thuộc:
-4. Cấu hình cơ sở dữ liệu (nếu cần).
-5. Chạy ứng dụng:
-
-
 ## Sử Dụng
 
 1. Đăng nhập hoặc đăng ký tài khoản.
